@@ -25,7 +25,7 @@ namespace VDF.GUI {
 	public class App : Application {
 		public static LanguageService Lang { get; } = new();
 		public override void Initialize() {
-			Lang.LoadLanguage("en");
+			Lang.LoadLanguage("zh");
 			AvaloniaXamlLoader.Load(this);
 		}
 

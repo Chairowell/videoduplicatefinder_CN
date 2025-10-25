@@ -1477,41 +1477,36 @@
                                             Content="深色模式¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=DarkMode}"
                                             IsThreeState="False" />
-                                        <TextBlock
-                                            Margin="0,5,0,5"
-                                            VerticalAlignment="Center"
-                                            Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
-                                            Text="¹ 重启 VDF 以应用更改" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="显示缩略图列"
-                                            IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowThumbnailColumn}"
-                                            IsThreeState="False" />
-                                        <CheckBox
-                                            VerticalAlignment="Center"
-                                            Content="显示路径列"
+                                            Content="Show Path Column¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowPathColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="显示时长列"
+                                            Content="Show Duration Column¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowDurationColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="显示格式列"
+                                            Content="Show Format Column¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowFormatColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="显示音频列"
+                                            Content="Show Audio Column¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowAudioColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="显示相似度列"
+                                            Content="Show Similarity Column¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowSimilarityColumn}"
                                             IsThreeState="False" />
+                                        <TextBlock
+                                            Margin="0,5,0,5"
+                                            VerticalAlignment="Center"
+                                            Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
+                                            Text="¹ Restart VDF to apply changes" />
                                     </StackPanel>
                                 </TabItem>
                             </TabControl>

@@ -194,7 +194,7 @@
                         <TextBlock
                             Grid.Row="2"
                             FontStyle="Italic"
-                            Text="Note: Supports the following wildcards: '*' and '?'. The backslash character '\' escapes." />
+                            Text="注意：支持以下通配符：'*'（星号）和 '?'（问号）。反斜杠字符 '\' 用于转义。" />
                     </Grid>
                     <TextBlock Margin="0,10" Text="路径**不**包含:" />
                     <Grid RowDefinitions="Auto, *, Auto">
@@ -240,7 +240,7 @@
                         <TextBlock
                             Grid.Row="2"
                             FontStyle="Italic"
-                            Text="Note: Supports the following wildcards: '*' and '?'. The backslash character '\' escapes." />
+                            Text="注意：支持以下通配符：'*'（星号）和 '?'（问号）。反斜杠字符 '\' 用于转义。" />
                     </Grid>
                 </StackPanel>
             </ScrollViewer>

@@ -472,7 +472,7 @@
                                         </MenuItem>
                                         <MenuItem Command="{Binding CopySelectionCommand}">
                                             <MenuItem.Header>
-                                                <TextBlock VerticalAlignment="Center" Text="Copy To Folder (Keep Files)" />
+                                                <TextBlock VerticalAlignment="Center" Text="复制到文件夹（保留文件）" />
                                             </MenuItem.Header>
                                         </MenuItem>
                                         <MenuItem Command="{Binding MoveSelectionCommand}">
@@ -737,7 +737,7 @@
                                                                 <TextBlock
                                                                     Margin="5,0,0,0"
                                                                     VerticalAlignment="Center"
-                                                                    Text="Remove from list only + create symbol links + exclude" />
+                                                                    Text="仅从列表中移除 + 创建符号链接 + 排除" />
                                                             </StackPanel>
                                                         </MenuItem.Header>
                                                     </MenuItem>
@@ -823,27 +823,27 @@
                                     MinHeight="20"
                                     Margin="0,5,0,0"
                                     Orientation="Horizontal">
-                                    <TextBlock Text="{Binding DuplicatesSelectedCounter, Mode=OneWay, StringFormat=Selected Duplicates: \{0\}}" />
+                                    <TextBlock Text="{Binding DuplicatesSelectedCounter, Mode=OneWay, StringFormat=已选重复项: \{0\}}" />
                                     <Border
                                         Width="1"
                                         Margin="5,0"
                                         Background="{actipro:ThemeResource ButtonForegroundBrush}" />
-                                    <TextBlock Text="{Binding TotalDuplicates, Mode=OneWay, StringFormat=Duplicates: \{0\}}" />
+                                    <TextBlock Text="{Binding TotalDuplicates, Mode=OneWay, StringFormat=重复项总数: \{0\}}" />
                                     <Border
                                         Width="1"
                                         Margin="5,0"
                                         Background="{actipro:ThemeResource ButtonForegroundBrush}" />
-                                    <TextBlock Text="{Binding TotalDuplicateGroups, Mode=OneWay, StringFormat=Duplicate Groups: \{0\}}" />
+                                    <TextBlock Text="{Binding TotalDuplicateGroups, Mode=OneWay, StringFormat=重复项组数: \{0\}}" />
                                     <Border
                                         Width="1"
                                         Margin="5,0"
                                         Background="{actipro:ThemeResource ButtonForegroundBrush}" />
-                                    <TextBlock Text="{Binding TotalDuplicatesSize, Mode=OneWay, StringFormat=Size: \{0\}}" />
+                                    <TextBlock Text="{Binding TotalDuplicatesSize, Mode=OneWay, StringFormat=大小: \{0\}}" />
                                     <Border
                                         Width="1"
                                         Margin="5,0"
                                         Background="{actipro:ThemeResource ButtonForegroundBrush}" />
-                                    <TextBlock Text="{Binding TotalSizeRemoved, Mode=OneWay, StringFormat=Size Removed: \{0\}}" />
+                                    <TextBlock Text="{Binding TotalSizeRemoved, Mode=OneWay, StringFormat=已移除大小: \{0\}}" />
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Row="3" Margin="0,5,0,0">
@@ -857,12 +857,12 @@
                                         Width="1"
                                         Margin="5,0"
                                         Background="{actipro:ThemeResource ButtonForegroundBrush}" />
-                                    <TextBlock Text="{Binding TimeElapsed, Mode=OneWay, StringFormat=Elapsed time: {0:c}}" />
+                                    <TextBlock Text="{Binding TimeElapsed, Mode=OneWay, StringFormat=已用时间: {0:c}}" />
                                     <Border
                                         Width="1"
                                         Margin="5,0"
                                         Background="{actipro:ThemeResource ButtonForegroundBrush}" />
-                                    <TextBlock Text="{Binding RemainingTime, Mode=OneWay, StringFormat=Remaining time: ~{0:c}}" />
+                                    <TextBlock Text="{Binding RemainingTime, Mode=OneWay, StringFormat=剩余时间: ~{0:c}}" />
                                     <Border
                                         Width="1"
                                         Margin="5,0"
@@ -947,7 +947,7 @@
                                                 Grid.Row="0"
                                                 Margin="10"
                                                 Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
-                                                Text="Hint: Mouse hover options to get more information about them" />
+                                                Text="提示: 鼠标悬停在选项上可获取更多信息" />
                                             <Grid Grid.Row="1" ColumnDefinitions="Auto, Auto, *">
                                                 <StackPanel Margin="5,5,0,0">
                                                     <CheckBox
@@ -976,7 +976,7 @@
                                                         Content="排除重解析点"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=IgnoreReparsePoints}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="Symbolic links and junction only. Note this will completely skip these from file enumeration to search." />
+                                                        ToolTip.Tip="仅限符号链接和连接点。注意：这将完全跳过这些文件的枚举和搜索。" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="排除硬链接"
@@ -1060,7 +1060,7 @@
                                                         Increment="0.1"
                                                         Maximum="100"
                                                         Minimum="1"
-                                                        ToolTip.Tip="Minimum percentage that thumbnails must match before they are considered duplicates"
+                                                        ToolTip.Tip="缩略图匹配的最小百分比，达到此值才被视为重复项"
                                                         Value="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=Percent}" />
                                                     <TextBlock VerticalAlignment="Center" Text="时长差异:" />
                                                     <NumericUpDown
@@ -1102,7 +1102,7 @@
                                                     <TextBox
                                                         VerticalAlignment="Center"
                                                         Text="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=CustomFFArguments}"
-                                                        ToolTip.Tip="FF(mpeg/probe) arguments passed to the end of the internal arguments. Most users can leave this empty." />
+                                                        ToolTip.Tip="FF(mpeg/probe) 参数会传递到内部参数的末尾。大多数用户可以留空。" />
                                                     <StackPanel Orientation="Horizontal">
                                                         <TextBlock
                                                             VerticalAlignment="Center"
@@ -1140,7 +1140,7 @@
                                                     <TextBox
                                                         VerticalAlignment="Center"
                                                         Text="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=CustomDatabaseFolder}"
-                                                        ToolTip.Tip="Specify a custom database folder. Otherwise it uses the current VDF folder." />
+                                                        ToolTip.Tip="指定一个自定义数据库文件夹。否则使用当前的 VDF 文件夹。" />
                                                 </StackPanel>
                                             </Grid>
                                             <Grid
@@ -1210,7 +1210,7 @@
                                                         Grid.Row="2"
                                                         Margin="5"
                                                         Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
-                                                        Text="Hint: You can also add folders with drag &amp; drop" />
+                                                        Text="提示: 您也可以通过拖放添加文件夹" />
                                                 </Grid>
                                                 <TextBlock
                                                     Grid.Row="0"
@@ -1280,7 +1280,7 @@
                                                         Grid.Row="2"
                                                         Margin="5"
                                                         Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
-                                                        Text="Hint: You can also add folders with drag &amp; drop" />
+                                                        Text="提示: 您也可以通过拖放添加文件夹" />
                                                 </Grid>
                                             </Grid>
                                         </Grid>
@@ -1395,7 +1395,7 @@
                                             <TextBlock
                                                 Grid.Row="2"
                                                 Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
-                                                Text="Note: Supports the following wildcards: '*' and '?'. The backslash character '\' escapes." />
+                                                Text="注意：支持以下通配符：'*'（星号）和 '?'（问号）。反斜杠字符 '\' 用于转义。" />
                                         </Grid>
                                         <CheckBox
                                             x:Name="CheckboxFilterByFilePathNotContains"
@@ -1455,7 +1455,7 @@
                                             <TextBlock
                                                 Grid.Row="2"
                                                 Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
-                                                Text="Note: Supports the following wildcards: '*' and '?'. The backslash character '\' escapes." />
+                                                Text="注意：支持以下通配符：'*'（星号）和 '?'（问号）。反斜杠字符 '\' 用于转义。" />
                                         </Grid>
                                     </Grid>
                                 </TabItem>
@@ -1479,34 +1479,34 @@
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="Show Path Column¹"
+                                            Content="显示路径列¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowPathColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="Show Duration Column¹"
+                                            Content="显示时长列¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowDurationColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="Show Format Column¹"
+                                            Content="显示格式列¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowFormatColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="Show Audio Column¹"
+                                            Content="显示音频列¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowAudioColumn}"
                                             IsThreeState="False" />
                                         <CheckBox
                                             VerticalAlignment="Center"
-                                            Content="Show Similarity Column¹"
+                                            Content="显示相似度列¹"
                                             IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ShowSimilarityColumn}"
                                             IsThreeState="False" />
                                         <TextBlock
                                             Margin="0,5,0,5"
                                             VerticalAlignment="Center"
                                             Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidWarning}"
-                                            Text="¹ Restart VDF to apply changes" />
+                                            Text="¹ 重启 VDF 以应用更改" />
                                     </StackPanel>
                                 </TabItem>
                             </TabControl>

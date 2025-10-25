@@ -67,7 +67,7 @@ namespace VDF.GUI.ViewModels {
 				});
 			}
 			catch {
-				await MessageBoxService.Show("Failed to open URL: https://trac.ffmpeg.org/wiki/HWAccelIntro#PlatformAPIAvailability");
+				await MessageBoxService.Show("无法打开链接: https://trac.ffmpeg.org/wiki/HWAccelIntro#PlatformAPIAvailability");
 			}
 		});
 		public ReactiveCommand<Unit, Unit> AddIncludesToListCommand => ReactiveCommand.CreateFromTask(async () => {
@@ -85,7 +85,7 @@ namespace VDF.GUI.ViewModels {
 			}
 		});
 		public ReactiveCommand<Unit, Unit> AddFilePathContainsTextToListCommand => ReactiveCommand.CreateFromTask(async () => {
-			var result = await InputBoxService.Show("New Entry");
+			var result = await InputBoxService.Show("新条目");
 			if (string.IsNullOrEmpty(result)) return;
 			if (!SettingsFile.Instance.FilePathContainsTexts.Contains(result))
 				SettingsFile.Instance.FilePathContainsTexts.Add(result);
@@ -96,7 +96,7 @@ namespace VDF.GUI.ViewModels {
 			return null!;
 		});
 		public ReactiveCommand<Unit, Unit> AddFilePathNotContainsTextToListCommand => ReactiveCommand.CreateFromTask(async () => {
-			var result = await InputBoxService.Show("New Entry");
+			var result = await InputBoxService.Show("新条目");
 			if (string.IsNullOrEmpty(result)) return;
 			if (!SettingsFile.Instance.FilePathNotContainsTexts.Contains(result))
 				SettingsFile.Instance.FilePathNotContainsTexts.Add(result);
@@ -114,13 +114,13 @@ namespace VDF.GUI.ViewModels {
 		});
 
 		public ReactiveCommand<Unit, Unit> ClearIncludesListCommand => ReactiveCommand.CreateFromTask(async () => {
-			var result = await MessageBoxService.Show("Are you sure you want to clear the list of ALL included folders?", MessageBoxButtons.Yes | MessageBoxButtons.Cancel);
+			var result = await MessageBoxService.Show("您确定要清除所有包含的文件夹列表吗？", MessageBoxButtons.Yes | MessageBoxButtons.Cancel);
 			if (result == MessageBoxButtons.Yes)
 				SettingsFile.Instance.Includes.Clear();
 		});
 
 		public ReactiveCommand<Unit, Unit> ClearBlacklistListCommand => ReactiveCommand.CreateFromTask(async () => {
-			var result = await MessageBoxService.Show("Are you sure you want to clear the list of ALL excluded folders?", MessageBoxButtons.Yes | MessageBoxButtons.Cancel);
+			var result = await MessageBoxService.Show("您确定要清除所有包含的文件夹列表吗？", MessageBoxButtons.Yes | MessageBoxButtons.Cancel);
 			if (result == MessageBoxButtons.Yes)
 				SettingsFile.Instance.Blacklists.Clear();
 		});
@@ -166,7 +166,7 @@ namespace VDF.GUI.ViewModels {
 				SettingsFile.SaveSettings();
 			}
 			catch (Exception ex) {
-				await MessageBoxService.Show($"Saving settings has failed: {ex.Message}");
+				await MessageBoxService.Show($"保存设置失败: {ex.Message}");
 			}
 		});
 		public ReactiveCommand<Unit, Unit> SaveSettingsProfileCommand => ReactiveCommand.CreateFromTask(async () => {
@@ -182,7 +182,7 @@ namespace VDF.GUI.ViewModels {
 				SettingsFile.SaveSettings(result);
 			}
 			catch (Exception ex) {
-				await MessageBoxService.Show($"Saving settings to file has failed: {ex.Message}");
+				await MessageBoxService.Show($"保存设置到文件失败: {ex.Message}");
 			}
 		});
 		public ReactiveCommand<Unit, Unit> LoadSettingsProfileCommand => ReactiveCommand.CreateFromTask(async () => {
@@ -197,10 +197,10 @@ namespace VDF.GUI.ViewModels {
 				SettingsFile.LoadSettings(result);
 			}
 			catch (Exception ex) {
-				await MessageBoxService.Show($"Loading settings from file has failed: {ex.Message}");
+				await MessageBoxService.Show($"从文件加载设置失败: {ex.Message}");
 				return;
 			}
-			await MessageBoxService.Show("Please restart VDF to apply new settings.");
+			await MessageBoxService.Show("请重启 VDF 以应用新设置。");
 		});
 
 	}

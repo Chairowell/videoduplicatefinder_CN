@@ -519,7 +519,7 @@ namespace VDF.GUI.ViewModels {
 			bool isReadyToCompare = IsGathered;
 			isReadyToCompare &= Scanner.Settings.ThumbnailCount == e.NewValue;
 			if (!isReadyToCompare && ApplicationHelpers.MainWindowDataContext.IsReadyToCompare)
-				await MessageBoxService.Show($"Number of thumbnails can't be changed between quick rescans. Full scan will be required.");
+				await MessageBoxService.Show($"快速重新扫描时无法更改缩略图数量，将需要进行完整扫描。");
 			ApplicationHelpers.MainWindowDataContext.IsReadyToCompare = isReadyToCompare;
 		}
 
@@ -529,7 +529,7 @@ namespace VDF.GUI.ViewModels {
 			RemainingTime = new TimeSpan();
 			ScanProgressValue = 0;
 			ScanProgressMaxValue = 100;
-			ThumbnailRetrievalProgressText = "Finished generating thumbnails for preview";
+			ThumbnailRetrievalProgressText = "预览缩略图已生成完毕";
 			ShowThumbnailRetrievalProgressBar = false;
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 			if (SettingsFile.Instance.BackupAfterListChanged)
@@ -541,7 +541,7 @@ namespace VDF.GUI.ViewModels {
 
 		async void Scanner_DatabaseCleaned(object? sender, EventArgs e) {
 			IsBusy = false;
-			await MessageBoxService.Show("Database cleaned!");
+			await MessageBoxService.Show("数据库已清理！");
 		}
 
 		public async Task<bool> SaveScanResults() {
@@ -549,7 +549,7 @@ namespace VDF.GUI.ViewModels {
 				try { Utils.ThumbCacheHelpers.Provider?.FlushIndex(); } catch { }
 				return true;
 			}
-			MessageBoxButtons? result = await MessageBoxService.Show("Do you want to save the results and continue next time you start VDF?",
+			MessageBoxButtons? result = await MessageBoxService.Show("您想保存结果并在下次启动 VDF 时继续吗？",
 				MessageBoxButtons.Yes | MessageBoxButtons.No | MessageBoxButtons.Cancel);
 			if (result == null || result == MessageBoxButtons.Cancel) {
 				//Can be NULL if user closed the window by clicking on 'X'
@@ -565,11 +565,11 @@ namespace VDF.GUI.ViewModels {
 
 		public async void LoadDatabase() {
 			IsBusy = true;
-			IsBusyOverlayText = "Loading database...";
+			IsBusyOverlayText = "正在加载数据库...";
 			bool success = await ScanEngine.LoadDatabase();
 			IsBusy = false;
 			if (!success) {
-				await MessageBoxService.Show("Failed to load database of scanned files. Please see log file in VDF directory");
+				await MessageBoxService.Show("加载已扫描文件数据库失败，请查看 VDF 目录中的日志文件。");
 				Environment.Exit(-1);
 			}
 		}
@@ -621,7 +621,7 @@ namespace VDF.GUI.ViewModels {
 
 				if (SettingsFile.Instance.GeneratePreviewThumbnails) {
 					ShowThumbnailRetrievalProgressBar = true;
-					ThumbnailRetrievalProgressText = "Starting to retrieve thumbnails for preview";
+					ThumbnailRetrievalProgressText = "正在开始检索预览缩略图...";
 					Scanner.RetrieveThumbnails();
 				}
 
@@ -635,7 +635,7 @@ namespace VDF.GUI.ViewModels {
 						   .GroupBy(x => x.GroupId)
 						   .Select(g => {
 							   var node = RowNode.Group(
-								   header: $"Group #{groupCounter} ({g.Count()})",
+								   header: $"组 #{groupCounter} ({g.Count()})",
 								   items: g.Select(x => new DuplicateItemVM(x)));
 							   groupCounter++;
 							   return node;
@@ -714,7 +714,7 @@ namespace VDF.GUI.ViewModels {
 				});
 			}
 			catch {
-				await MessageBoxService.Show("Failed to open URL: https://github.com/0x90d/videoduplicatefinder/releases");
+				await MessageBoxService.Show("无法打开链接: https://github.com/0x90d/videoduplicatefinder/releases");
 			}
 		});
 
@@ -733,11 +733,11 @@ namespace VDF.GUI.ViewModels {
 
 		public ReactiveCommand<Unit, Unit> ClearDatabaseCommand => ReactiveCommand.CreateFromTask(async () => {
 			MessageBoxButtons? dlgResult = await MessageBoxService.Show(
-				"WARNING: This will delete all stored data in your database. Do you want to continue?",
+				"警告：这将会删除数据库中所有已存储的数据。您确定要继续吗？",
 				MessageBoxButtons.Yes | MessageBoxButtons.No);
 			if (dlgResult != MessageBoxButtons.Yes) return;
 			ScanEngine.ClearDatabase();
-			await MessageBoxService.Show("Done!");
+			await MessageBoxService.Show("数据库已清除！");
 		});
 
 		public static ReactiveCommand<Unit, Unit> EditDataBaseCommand => ReactiveCommand.CreateFromTask(async () => {
@@ -755,7 +755,7 @@ namespace VDF.GUI.ViewModels {
 				IncludeFields = true,
 			});
 			if (!success)
-				await MessageBoxService.Show("Importing database has failed, please see log");
+				await MessageBoxService.Show("导入数据库失败，请查看日志");
 			else
 				ScanEngine.SaveDatabase();
 		});
@@ -782,7 +782,7 @@ namespace VDF.GUI.ViewModels {
 			if (string.IsNullOrEmpty(result)) return;
 
 			if (!ScanEngine.ExportDataBaseToJson(result, options))
-				await MessageBoxService.Show("Exporting database has failed, please see log");
+				await MessageBoxService.Show("导出数据库失败，请查看日志");
 		}
 
 		public ReactiveCommand<Unit, Unit> ExportScanResultsCommand => ReactiveCommand.CreateFromTask(async () => {
@@ -816,7 +816,7 @@ namespace VDF.GUI.ViewModels {
 
 
 			IsBusy = true;
-			IsBusyOverlayText = "Saving scan results to disk...";
+			IsBusyOverlayText = "正在将扫描结果保存到磁盘...";
 			var dir = Path.GetDirectoryName(path)!;
 			var tmp = Path.Combine(dir, Path.GetFileName(path) + ".tmp");
 
@@ -868,7 +868,7 @@ namespace VDF.GUI.ViewModels {
 			}
 			catch (Exception ex) {
 				IsBusy = false;
-				string error = $"Exporting scan results has failed because of {ex}";
+				string error = $"导出扫描结果失败，原因: {ex}";
 				Logger.Instance.Info(error);
 				await MessageBoxService.Show(error);
 			}
@@ -887,7 +887,7 @@ namespace VDF.GUI.ViewModels {
 		});
 		async void ImportScanResultsIncludingThumbnails(string? path = null) {
 			if (_allGroups.Count > 0) {
-				MessageBoxButtons? result = await MessageBoxService.Show($"Importing scan results will clear the current list, continue?", MessageBoxButtons.Yes | MessageBoxButtons.No);
+				MessageBoxButtons? result = await MessageBoxService.Show($"导入扫描结果将清空当前列表，是否继续？", MessageBoxButtons.Yes | MessageBoxButtons.No);
 				if (result != MessageBoxButtons.Yes) return;
 			}
 
@@ -902,7 +902,7 @@ namespace VDF.GUI.ViewModels {
 			try {
 				using var stream = File.OpenRead(path);
 				IsBusy = true;
-				IsBusyOverlayText = "Importing scan results from disk...";
+				IsBusyOverlayText = "正在从磁盘导入扫描结果...";
 
 
 				using var zip = ZipFile.OpenRead(path);
@@ -927,13 +927,13 @@ namespace VDF.GUI.ViewModels {
 			}
 			catch (JsonException) {
 				IsBusy = false;
-				string error = $"Importing scan results has failed because it's likely corrupted";
+				string error = $"导入扫描结果失败，可能是文件已损坏";
 				Logger.Instance.Info(error);
 				await MessageBoxService.Show(error);
 			}
 			catch (Exception ex) {
 				IsBusy = false;
-				string error = $"Importing scan results has failed because of {ex}";
+				string error = $"导入扫描结果失败，原因: {ex}";
 				Logger.Instance.Info(error);
 				await MessageBoxService.Show(error);
 			}
@@ -977,7 +977,7 @@ namespace VDF.GUI.ViewModels {
 				}
 			}
 			catch (Exception ex) {
-				await MessageBoxService.Show($"Failed to open files: {ex.Message}");
+				await MessageBoxService.Show($"未能打开文件: {ex.Message}");
 				return;
 			}
 		}
@@ -1003,7 +1003,7 @@ namespace VDF.GUI.ViewModels {
 				}
 			}
 			catch (Exception ex) {
-				await MessageBoxService.Show($"Failed to open files: {ex.Message}");
+				await MessageBoxService.Show($"未能打开文件夹: {ex.Message}");
 				return;
 			}
 		}
@@ -1060,7 +1060,7 @@ namespace VDF.GUI.ViewModels {
 				});
 			}
 			catch (Exception e) {
-				Logger.Instance.Info($"Failed to run custom command: {command}\n Arguments: {args}\nException: {e.Message}");
+				Logger.Instance.Info($"未能运行自定义命令: {command}\n 参数: {args}\n异常: {e.Message}");
 			}
 
 			return true;
@@ -1069,21 +1069,21 @@ namespace VDF.GUI.ViewModels {
 		public ReactiveCommand<Unit, Unit> RenameFileCommand => ReactiveCommand.CreateFromTask(async () => {
 			if (GetSelectedDuplicateItem() is not DuplicateItemVM currentItem) return;
 			if (!File.Exists(currentItem.ItemInfo.Path)) {
-				await MessageBoxService.Show("The file no longer exists");
+				await MessageBoxService.Show("文件不存在");
 				return;
 			}
 			var fi = new FileInfo(currentItem.ItemInfo.Path);
 			Debug.Assert(fi.Directory != null, "fi.Directory != null");
-			string newName = await InputBoxService.Show("Enter new name", Path.GetFileNameWithoutExtension(fi.FullName), title: "Rename File");
+			string newName = await InputBoxService.Show("输入新文件名", Path.GetFileNameWithoutExtension(fi.FullName), title: "重命名文件");
 			if (string.IsNullOrEmpty(newName)) return;
 			newName = FileUtils.SafePathCombine(fi.DirectoryName!, newName + fi.Extension);
 			while (File.Exists(newName)) {
-				MessageBoxButtons? result = await MessageBoxService.Show($"A file with the name '{Path.GetFileName(newName)}' already exists. Do you want to overwrite this file? Click on 'No' to enter a new name", MessageBoxButtons.Yes | MessageBoxButtons.No | MessageBoxButtons.Cancel);
+				MessageBoxButtons? result = await MessageBoxService.Show($"文件 '{Path.GetFileName(newName)}' 已存在。是否要覆盖此文件？点击 '否' 输入新文件名", MessageBoxButtons.Yes | MessageBoxButtons.No | MessageBoxButtons.Cancel);
 				if (result == null || result == MessageBoxButtons.Cancel)
 					return;
 				if (result == MessageBoxButtons.Yes)
 					break;
-				newName = await InputBoxService.Show("Enter new name", Path.GetFileNameWithoutExtension(newName), title: "Rename File");
+				newName = await InputBoxService.Show("输入新文件名", Path.GetFileNameWithoutExtension(newName), title: "重命名文件");
 				if (string.IsNullOrEmpty(newName))
 					return;
 				newName = FileUtils.SafePathCombine(fi.DirectoryName!, newName + fi.Extension);
@@ -1142,22 +1142,22 @@ namespace VDF.GUI.ViewModels {
 
 			var osArch = RuntimeInformation.OSArchitecture;
 			var procArch = RuntimeInformation.ProcessArchitecture;
-			string versionPart = ffMajor == 0 ? "unknown (old headers?)" : $"{ffMajor}.x";
+			string versionPart = ffMajor == 0 ? "未知 (旧版头文件？)" : $"{ffMajor}.x";
 			string archPart = ArchString(procArch);
 
 			var msg =
 $@"FFmpeg was not found.
 
-Which FFmpeg you need:
-  • Version: FFmpeg {versionPart}
-  • Architecture: {archPart}
+需要的 FFmpeg 版本：
+  • 版本: FFmpeg {versionPart}
+  • 架构: {archPart}
 
-Platform/OS:
-  • {platform} · OS arch: {ArchString(osArch)} · Process arch: {ArchString(procArch)}
+平台/操作系统：
+  • {platform} · OS 架构: {ArchString(osArch)} · 进程架构: {ArchString(procArch)}
 
 Notes:
-  • On ARM64 systems (e.g., Windows/macOS ARM): if your app runs as x64 (emulation/Rosetta), use x64 FFmpeg.
-    If it runs natively as ARM64, use ARM64 FFmpeg.";
+  • 在 ARM64 系统 (例如 Windows/macOS ARM) 上：如果您的应用以 x64 (仿真/Rosetta) 运行，使用 x64 FFmpeg。
+    如果以 ARM64 原生运行，使用 ARM64 FFmpeg。";
 
 			// Windows-specific placement instructions (VDF\bin)
 			if (OperatingSystem.IsWindows()) {
@@ -1168,11 +1168,11 @@ Notes:
 				msg +=
 	$@"
 
-Windows setup:
-  1) Create a folder named 'bin' inside your VDF folder:
+Windows 安装说明：
+  1) 在 VDF 文件夹内创建一个名为 'bin' 的文件夹：
        {target}
-  2) Download the FFmpeg {versionPart} shared build for {archPart}.
-  3) Extract these DLLs into that 'bin' folder:
+  2) 下载 FFmpeg {versionPart} 共享构建版本，对应 {archPart}。
+  3) 将以下 DLL 文件提取到该 'bin' 文件夹中：
        avcodec-*.dll, avformat-*.dll, avutil-*.dll, swresample-*.dll, swscale-*.dll";
 			}
 			else {
@@ -1180,12 +1180,12 @@ Windows setup:
 				msg +=
 	@"
 
-Non-Windows setup:
-  • Recommended: Check Github instructions
-  • Use the shared libraries matching the required version/architecture.
-  • Make sure the dynamic loader can find them (e.g., alongside your app binary,
-    via rpath, or environment variables like LD_LIBRARY_PATH/DYLD_LIBRARY_PATH).
-  • Typical library names:
+非 Windows 平台安装说明：
+  • 推荐：检查 Github 说明
+  • 使用与所需版本/架构匹配的共享库。
+  • 确保动态加载器可以找到它们（例如，与您的应用二进制文件 alongside，
+    通过 rpath，或环境变量如 LD_LIBRARY_PATH/DYLD_LIBRARY_PATH）。
+  • 典型的库文件名：
       - Linux: libavcodec.so.*, libavformat.so.*, libavutil.so.*, libswresample.so.*, libswscale.so.*
       - macOS: libavcodec.*.dylib, libavformat.*.dylib, libavutil.*.dylib, libswresample.*.dylib, libswscale.*.dylib";
 			}
@@ -1195,11 +1195,11 @@ Non-Windows setup:
 
 		public ReactiveCommand<string, Unit> StartScanCommand => ReactiveCommand.CreateFromTask(async (string command) => {
 			if (!string.IsNullOrEmpty(SettingsFile.Instance.CustomDatabaseFolder) && !Directory.Exists(SettingsFile.Instance.CustomDatabaseFolder)) {
-				await MessageBoxService.Show("The custom database folder does not exist!");
+				await MessageBoxService.Show("自定义数据库文件夹不存在！");
 				return;
 			}
 			if (_allGroups.Count > 0) {
-				if (await MessageBoxService.Show("Do you want to discard the results and start a new scan?", MessageBoxButtons.Yes | MessageBoxButtons.No) != MessageBoxButtons.Yes) {
+				if (await MessageBoxService.Show("您确定要丢弃结果并开始新的扫描吗？", MessageBoxButtons.Yes | MessageBoxButtons.No) != MessageBoxButtons.Yes) {
 					return;
 				}
 			}
@@ -1211,27 +1211,27 @@ Non-Windows setup:
 			}
 			if (!ScanEngine.FFprobeExists) {
 				if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-					await MessageBoxService.Show("Cannot find FFprobe executable. The easiest solution is to download ffmpeg/ffprobe and place it in VDF 'bin' folder. Otherwise please follow instructions on Github and restart VDF");
+					await MessageBoxService.Show("无法找到 FFprobe 可执行文件。最简单的解决方案是下载 ffmpeg/ffprobe 并将其放在 VDF 'bin' 文件夹中。否则，请按照 Github 上的说明进行操作并重新启动 VDF");
 				}
 				else {
-					await MessageBoxService.Show("Cannot find FFprobe. Please follow instructions on Github and restart VDF");
+					await MessageBoxService.Show("无法找到 FFprobe。请按照 Github 上的说明进行操作并重新启动 VDF");
 				}
 				return;
 			}
 			if (SettingsFile.Instance.UseNativeFfmpegBinding && SettingsFile.Instance.HardwareAccelerationMode == Core.FFTools.FFHardwareAccelerationMode.auto) {
-				await MessageBoxService.Show("You cannot use hardware acceleration mode 'auto' with native ffmpeg bindings. Please explicit set a mode or set it to 'none'.");
+				await MessageBoxService.Show("您不能使用硬件加速模式 'auto' 与本地 FFmpeg 绑定。请显式设置一个模式或将其设置为 'none'。");
 				return;
 			}
 			if (SettingsFile.Instance.Includes.Count == 0) {
-				await MessageBoxService.Show("There are no folders to scan. Please go to the settings and add at least one folder to 'Search Directories'.");
+				await MessageBoxService.Show("没有要扫描的文件夹。请转到设置并添加至少一个文件夹到 'Search Directories'。");
 				return;
 			}
 			if (SettingsFile.Instance.MaxDegreeOfParallelism == 0) {
-				await MessageBoxService.Show("MaxDegreeOfParallelism cannot be 0. Please go to the settings and change it.");
+				await MessageBoxService.Show("MaxDegreeOfParallelism 不能为 0。请转到设置并更改它。");
 				return;
 			}
 			if (SettingsFile.Instance.FilterByFileSize && SettingsFile.Instance.MaximumFileSize <= SettingsFile.Instance.MinimumFileSize) {
-				await MessageBoxService.Show("Filtering maximum file size cannot be greater or equal minimum file size.");
+				await MessageBoxService.Show("过滤最大文件大小不能大于或等于最小文件大小。");
 				return;
 			}
 			bool isFreshScan = true;
@@ -1241,11 +1241,11 @@ Non-Windows setup:
 				break;
 			case "CompareOnly":
 				isFreshScan = false;
-				if (await MessageBoxService.Show("Are you sure to perform a rescan?", MessageBoxButtons.Yes | MessageBoxButtons.No) != MessageBoxButtons.Yes)
+				if (await MessageBoxService.Show("您确定要重新扫描吗？", MessageBoxButtons.Yes | MessageBoxButtons.No) != MessageBoxButtons.Yes)
 					return;
 				break;
 			default:
-				await MessageBoxService.Show("Requested command is NOT implemented yet!");
+				await MessageBoxService.Show("请求的命令尚未实现！");
 				break;
 			}
 
@@ -1330,7 +1330,7 @@ Non-Windows setup:
 		public ReactiveCommand<Unit, Unit> StopScanCommand => ReactiveCommand.Create(() => {
 			IsPaused = false;
 			IsBusy = true;
-			IsBusyOverlayText = "Stopping all scan threads...";
+			IsBusyOverlayText = "正在停止所有扫描线程...";
 			Scanner.Stop();
 		}, this.WhenAnyValue(x => x.IsScanning));
 
@@ -1386,8 +1386,8 @@ Non-Windows setup:
 
 			MessageBoxButtons? dlgResult = await MessageBoxService.Show(
 				fromDisk
-					? $"Are you sure you want to{(CoreUtils.IsWindows && !permanently ? " move" : " permanently delete")} the selected files{(CoreUtils.IsWindows && !permanently ? " to recycle bin (only if supported, i.e. network files will be deleted instead)" : " from disk")}?"
-					: $"Are you sure to delete selected from list (keep files){(blackList ? " and blacklist them" : string.Empty)}?",
+					? $"您确定要{(CoreUtils.IsWindows && !permanently ? "移动" : "永久删除")}选中的文件{(CoreUtils.IsWindows && !permanently ? "到回收站（仅在支持时，即网络文件将被删除）" : "从磁盘删除")}吗？"
+					: $"您确定要从列表中删除选中的项（保留文件）{(blackList ? "并将其添加到黑名单" : string.Empty)}吗？",
 				MessageBoxButtons.Yes | MessageBoxButtons.No);
 			if (dlgResult != MessageBoxButtons.Yes) return;
 
@@ -1409,7 +1409,7 @@ Non-Windows setup:
 						if (createSymbolLinksInstead) {
 							var keeper = keepByGroup.TryGetValue(dub.ItemInfo.GroupId, out var k) ? k : null;
 							if (keeper == null)
-								throw new Exception($"Cannot create symlink for '{dub.ItemInfo.Path}' because all items in this group are selected");
+								throw new Exception($"无法为 '{dub.ItemInfo.Path}' 创建符号链接，因为此组中的所有项均已选中");
 							File.CreateSymbolicLink(dub.ItemInfo.Path, keeper.ItemInfo.Path);
 							freedBytes += dub.ItemInfo.SizeLong;
 						}
@@ -1441,7 +1441,7 @@ Non-Windows setup:
                     actuallyDeleted.Add(dub);
 				}
 				catch (Exception ex) {
-					Logger.Instance.Info($"Failed to delete '{dub.ItemInfo.Path}': {ex.Message}\n{ex.StackTrace}");
+					Logger.Instance.Info($"删除 '{dub.ItemInfo.Path}' 失败：{ex.Message}\n{ex.StackTrace}");
 				}
 			}
 

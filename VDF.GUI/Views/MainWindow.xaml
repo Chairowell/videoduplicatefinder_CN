@@ -108,7 +108,7 @@
                                     CommandParameter="CompareOnly"
                                     IsEnabled="{Binding IsReadyToCompare}"
                                     IsVisible="{Binding !IsScanning}"
-                                    ToolTip.Tip="Re-run the scan but without enumerating and gathering file informations. Changing certain settings will only take effect during a full scan.">
+                                    ToolTip.Tip="重新运行扫描，但跳过枚举和收集文件信息。请注意，更改某些设置仅在完整扫描时生效。">
                                     <MenuItem.Header>
                                         <StackPanel Orientation="Horizontal">
                                             <Viewbox Width="20" Height="20">
@@ -862,7 +862,7 @@
                                         Width="1"
                                         Margin="5,0"
                                         Background="{actipro:ThemeResource ButtonForegroundBrush}" />
-                                    <TextBlock Text="{Binding RemainingTime, Mode=OneWay, StringFormat=剩余时间: ~{0:c}}" />
+                                    <TextBlock Text="{Binding RemainingTime, Mode=OneWay, StringFormat=剩余时间: {0:c}}" />
                                     <Border
                                         Width="1"
                                         Margin="5,0"
@@ -982,7 +982,7 @@
                                                         Content="排除硬链接"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ExcludeHardLinks}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="Unlike reparse points hard links are still included in search but are not considered as duplicates. WARNING: Use this option only when necessary, as it slows down the scanning process considerably!" />
+                                                        ToolTip.Tip="与重解析点不同，硬链接仍会包含在搜索中，但不会被视为重复项。警告：仅在必要时使用此选项，因为它会显著降低扫描速度！" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="扩展 FFTools 日志记录"
@@ -994,7 +994,7 @@
                                                         Content="始终重试失败的采样"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=AlwaysRetryFailedSampling}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="If activated scan engine will try to generate thumbprints of failed entries each time it is run. Otherwise consecutive attempt will be taken only after cleanup of the database." />
+                                                        ToolTip.Tip="如果启用，扫描引擎将在每次运行时尝试生成失败条目的缩略图。否则，只有在清理数据库后才会进行后续尝试。" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="自动备份扫描结果"
@@ -1006,25 +1006,25 @@
                                                         Content="使用原生 Ffmpeg 绑定"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=UseNativeFfmpegBinding}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="If activated it will call ffmpeg functions natively instead of spawning a new ffmpeg.exe process. This is MUCH(!!) faster. WARNING: You must use the latest SHARED and STABLE ffmpeg version. If something goes wrong then whole VDF will crash." />
+                                                        ToolTip.Tip="如果启用此功能，程序将原生调用 FFmpeg 函数，而不是启动一个新的 ffmpeg.exe 进程。这会快得多!! 警告：您必须使用最新、共享且稳定的 FFmpeg 版本。如果出现任何问题，整个 VDF 程序将会崩溃。" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="忽略黑色像素"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=IgnoreBlackPixels}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="Skip black pixels when comparing thumbnails. Lowers the chance for 'false positives' if thumbnails contain too much dark and raises the chance to detect duplicates if one of the thumbnails have black bars and the others not. In rare scenarios this might raise the 'false positives' instead. Slows down the scan speed by a bit." />
+                                                        ToolTip.Tip="比较缩略图时跳过黑色像素。这有助于在缩略图包含过多暗色部分时，降低“误报”（False Positives）的可能性。同时，如果其中一张缩略图带有黑边/黑条而其他没有，此功能可提高检测到重复项的几率。请注意，在极少数情况下，此操作可能会反而增加“误报”的可能性。此操作会略微降低扫描速度。" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="忽略白色像素"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=IgnoreWhitePixels}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="Skip white pixels when comparing thumbnails. Lowers the chance for 'false positives' if thumbnails contain too much brightness and raises the chance to detect duplicates if one of the thumbnails have white bars and the others not. In rare scenarios this might raise the 'false positives' instead. Slows down the scan speed by a bit." />
+                                                        ToolTip.Tip="比较缩略图时跳过白色像素。这有助于在缩略图包含过多高亮或亮白区域时，降低“误报”（False Positives）的可能性。同时，如果其中一张缩略图带有白边/白条而其他没有，此功能可提高检测到重复项的几率。请注意，在极少数情况下，此操作可能会反而增加“误报”的可能性。此功能会略微降低扫描速度。" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="比较水平翻转的图像"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=CompareHorizontallyFlipped}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="Select this option if your video collection might contain horizontally flipped videos and you want them to be detected reliably. Slows down the scan speed by a bit." />
+                                                        ToolTip.Tip="如果您的视频可能包含水平翻转的视频，且希望可靠地检测到它们，请选择此选项。此功能会略微降低扫描速度。" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="退出时保存结果"
@@ -1042,13 +1042,13 @@
                                                         Content="扫描针对整个数据库"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=ScanAgainstEntireDatabase}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="If checked scan is also performed against your entire database unless database files are excluded otherwise (i.e. exclude list, file path must contain, etc)" />
+                                                        ToolTip.Tip="如果勾选，扫描将对您的整个数据库执行，除非数据库文件通过其他方式被排除（例如：排除列表、文件路径必须包含等）。" />
                                                     <CheckBox
                                                         VerticalAlignment="Center"
                                                         Content="使用 pHash 而不是视觉相似度"
                                                         IsChecked="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=UsePHash}"
                                                         IsThreeState="False"
-                                                        ToolTip.Tip="pHash = slower but more robust to re-encoding, resizing, contrast changes etc. Visual similarity = faster, also works on reencoded videos, watermarks etc but less robust. Ignored if you're using an old database with 16x16 graybyte values." />
+                                                        ToolTip.Tip="pHash = 较慢，但对视频重新编码、调整大小、对比度等变化更鲁棒。视觉相似度 = 较快，也适用于重新编码的视频、水印等，但鲁棒性较低。如果您使用的是旧数据库，其中包含 16x16 灰度字节值，则此选项将被忽略。" />
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="1" Margin="15,5,0,0">
                                                     <TextBlock VerticalAlignment="Center" Text="百分比:" />
@@ -1083,7 +1083,7 @@
                                                         VerticalAlignment="Center"
                                                         Maximum="100"
                                                         Minimum="1"
-                                                        ToolTip.Tip="Number of thumbnails generated per file. This only applies to video files. A high number means that the scan takes longer but also the chance of a 'false positive' decreases."
+                                                        ToolTip.Tip="每个文件生成的缩略图数量。仅适用于视频文件。较高的值意味着扫描时间较长，但也减少了“误报”的机会。"
                                                         ValueChanged="Thumbnails_ValueChanged"
                                                         Value="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=Thumbnails}" />
                                                     <TextBlock
@@ -1096,7 +1096,7 @@
                                                         VerticalAlignment="Center"
                                                         Maximum="100"
                                                         Minimum="-1"
-                                                        ToolTip.Tip="Limits the amount of concurrent tasks. A value of -1 leaves it up to the system to decide (takes full speed), a value of 1 is most stable (lets you interact with your system while scan runs in background). Maximum should be the amount of physical cores of your CPU."
+                                                        ToolTip.Tip="限制并发任务的数量。-1 表示让系统根据需要决定（最大速度），1 是最稳定的（允许您在扫描运行时与系统交互）。最大值应该是您 CPU 的物理核心数量。"
                                                         Value="{Binding Source={x:Static Settings:SettingsFile.Instance}, Path=MaxDegreeOfParallelism}" />
                                                     <TextBlock VerticalAlignment="Center" Text="自定义 FF 参数:" />
                                                     <TextBox

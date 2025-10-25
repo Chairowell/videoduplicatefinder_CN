@@ -12,21 +12,21 @@
 		Padding="20"
         Title="Choose Algorithm View">
 		<StackPanel >
-			<TextBlock  Margin="0,5" TextWrapping="Wrap" Text="Please choose your graybyte database format. You cannot switch between them later on. The only way is to delete the entire database and start from scratch. Both use visual similarity frame check as default algorithm. In both cases you can find duplicates even if different resolution, added watermark, changes to fps / bitrate etc"/>
+			<TextBlock  Margin="0,5" TextWrapping="Wrap" Text="请选择您的灰字节数据库格式。一旦选择，您之后将无法在它们之间切换。唯一的办法是删除整个数据库并从头开始。这两种格式都使用视觉相似度帧检查作为默认算法。在这两种情况下，即使视频分辨率不同、添加了水印、帧率/比特率有所变化等，您仍然可以找到重复项。"/>
 			<RadioButton x:Name="Cb16x16"
 					  Margin="0,5"
 					  Content="16x16"/>
-			<TextBlock TextWrapping="Wrap" Margin="30,5" xml:space="preserve">• Fastest
-• More false positives
-• pHash algorithm is NOT available
+			<TextBlock TextWrapping="Wrap" Margin="30,5" xml:space="preserve">• 最快
+• 误报率更高
+• 不支持 pHash 算法
 			</TextBlock>
 			<RadioButton  x:Name="Cb32x32"
 					   Content="32x32 (recommmended)"
 					   IsChecked="true"/>
-			<TextBlock TextWrapping="Wrap" Margin="30,5" xml:space="preserve">• Slower than 16x16 (theoretically 4x slower but practically in most cases +40-60% additional scan time)
-• Less false positives
-• pHash algorithm is available. More robust when duplicates differ due to changes in contrast, brightness, scaling, or minor edits (but not automatically better, it just works differently)
-• When a video is first added to the database, pHash signature is automatically generated, making the initial scan slower. On subsequent rescans, you can switch between both algorithms with negligible performance cost, enabling highly efficient duplicate detection
+			<TextBlock TextWrapping="Wrap" Margin="30,5" xml:space="preserve">• 比 16x16 慢 (理论上慢 4 倍，但在实际中大多数情况只会增加 40% 到 60% 的额外扫描时间)
+• 误报率更低
+• 支持 pHash 算法。当重复项因对比度、亮度、缩放或细微编辑等变化而有所不同时，此算法更加稳健 (但并非自动更好，只是工作方式不同)
+• 当视频首次添加到数据库时，程序会自动生成 pHash 签名，这会减慢初始扫描速度。在后续重新扫描中，您可以在两种算法之间切换，性能成本可忽略不计，从而实现高效的重复项检测。
 			</TextBlock>
 			<Button MaxWidth="300" Margin="0,5" Content="{Binding Source={x:Static app:App.Lang}, Path=[Dialog.OK]}" Click="Button_Click"/>
 		</StackPanel>

@@ -21,7 +21,7 @@
 • 不支持 pHash 算法
 			</TextBlock>
 			<RadioButton  x:Name="Cb32x32"
-					   Content="32x32 (recommmended)"
+					   Content="32x32 (推荐)"
 					   IsChecked="true"/>
 			<TextBlock TextWrapping="Wrap" Margin="30,5" xml:space="preserve">• 比 16x16 慢 (理论上慢 4 倍，但在实际中大多数情况只会增加 40% 到 60% 的额外扫描时间)
 • 误报率更低

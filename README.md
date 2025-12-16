@@ -6,7 +6,7 @@
 > 
 > 3. 所有信息以原始仓库为准，本仓库仅供参考
 >
-> 4. 若你在其他平台分享推荐该软件，请在分享时携带以上警告信息，谢谢。
+> 4. 若你在其他平台分享推荐该软件，请在分享时携带以上警告信息，谢谢
 
 > [!TIP]
 > This is a repository for the Chinese-localized version of Video Duplicate Finder. We use some Python scripts to assist us in translating the software. If you want to create other language versions of the translation, you can take a look [HERE -> (Chairowell/videoduplicatefinder-translator)](https://github.com/Chairowell/videoduplicatefinder-translator).
@@ -72,7 +72,11 @@ sudo apt-get install ffmpeg
 如果进程立即被终止（显示类似 `zsh: killed` 的信息），二进制文件可能需要签名。运行 `codesign --force --sign - ./VDF.GUI` 然后重试。
 
 ## 截图
-<img src="https://user-images.githubusercontent.com/46010672/129763067-8855a538-4a4f-4831-ac42-938eae9343bd.png" width="510">
+<img width="1406" height="994" alt="image" src="https://github.com/user-attachments/assets/34759c5c-ba5c-4f01-812d-410e7ed5eb35" />
+<img width="1406" height="994" alt="image" src="https://github.com/user-attachments/assets/063a4bbc-1a92-4ba9-a3ed-3d3c00318e05" />
+<img width="1406" height="994" alt="image" src="https://github.com/user-attachments/assets/b33943e3-fcf1-4e30-9ca7-a5604aeeb139" />
+
+
 
 ## License - 许可证
 Video Duplicate Finder is licensed under GPLv3

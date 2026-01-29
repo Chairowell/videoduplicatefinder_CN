@@ -1,4 +1,7 @@
 # Video Duplicate Finder (CN) - 视频重复项查找工具 (汉化版)
+> [!TIP]
+> 鉴于VDF原仓库作者已经实现了[多语言功能](https://github.com/0x90d/videoduplicatefinder/commit/3fd413d66dbb3cdf52e03234ac71439cc0a1edcf)，简体汉化已经被集成在预构建版内。此仓库将转为存档，对此此场库汉化问题不再做处理。
+
 > [!CAUTION]
 > 1. 请 **<i>不要</i>** 在 [原始仓库（0x90d/videoduplicatefinder）](https://github.com/0x90d/videoduplicatefinder) 内提出任何与汉化相关的 Issue。所有汉化问题请在 本仓库 内提交 Issue 或 PR
 > 
